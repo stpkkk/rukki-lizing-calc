@@ -5,110 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
+
     <title>lizing-calc</title>
   </head>
   <body>
     <div class="container">
-      <div class="sc-iuxOeI iHSHWr">
-        <div class="calculatorFlex">
-          <div class="calculatorFlexElement _white">
-            <div class="inputGroup">
-              <div class="price">
-                <label class="price-label">Стоимость имущества</label>
-                <output class="price-value priceSum"
-                  >50000<span> ₽</span></output
-                >
-              </div>
-              <div>
-                <input
-                  type="range"
-                  min="500000"
-                  max="400000000"
-                  value="500000"
-                  class="slider"
-                  id="slider1"
-                />
-              </div>
-              <div class="nums">
-                <span>500 000 ₽</span><span>400 000 000 ₽</span>
-              </div>
+      <div class="calculatorFlex">
+        <div class="calculatorFlexElement _white">
+          <div class="inputGroup">
+            <div class="price">
+              <label class="price-label">Стоимость имущества</label>
+              <output class="price-value priceSum">50000<span> ₽</span></output>
             </div>
-            <div class="inputGroup">
-              <div class="sc-islFiG jwyeRo">
-                <div class="paymentText">Первоначальный взнос</div>
-                <div class="paymentSum">
-                  <div class="prise">0 ₽</div>
-                  <div class="precent">0 %</div>
-                </div>
-              </div>
+            <div>
               <input
-                min="0"
-                max="49"
                 type="range"
-                value="0"
-                id="slider2"
-                style="
-                  background: linear-gradient(
-                    to right,
-                    rgb(236, 110, 68) 0%,
-                    rgb(236, 110, 68) 0%,
-                    rgb(229, 231, 235) 0%,
-                    rgb(229, 231, 235) 100%
-                  );
-                "
+                min="500000"
+                max="400000000"
+                value="500000"
+                id="slider1"
+                class="styled-slider slider-progress"
               />
-              <div class="nums"><span>0 %</span><span>49 %</span></div>
             </div>
-            <div class="inputGroup">
-              <div class="sc-eCrewB iCCZpA price">
-                <p class="priceText">Срок договора</p>
-                <p class="priceSum month">36 месяцев</p>
-              </div>
-              <input
-                min="12"
-                max="36"
-                type="range"
-                value="12"
-                id="slider3"
-                style="
-                  background: linear-gradient(
-                    to right,
-                    rgb(236, 110, 68) 0%,
-                    rgb(236, 110, 68) 0%,
-                    rgb(229, 231, 235) 0%,
-                    rgb(229, 231, 235) 100%
-                  );
-                "
-              />
-              <div class="nums">
-                <span>12 месяцев</span><span>60 месяцев</span>
-              </div>
+            <div class="nums">
+              <span>500 000 ₽</span><span>400 000 000 ₽</span>
             </div>
           </div>
-          <div class="calculatorFlexElement _orange">
-            <span class="calculator__subprice">Ежемесячный платеж</span
-            ><span class="calculator__price">500 000 ₽</span>
-            <div class="calculator__contract">
-              <span>Сумма договора лизинга</span>
-              <p>200 000 ₽</p>
+          <div class="inputGroup">
+            <div class="sc-islFiG jwyeRo payment">
+              <div class="paymentText">Первоначальный взнос</div>
+              <div class="paymentSum">
+                <div class="prise">0 ₽</div>
+                <div class="precent">0 %</div>
+              </div>
             </div>
-            <div class="calculator__contract">
-              <span>Годовое удорожание</span>
-              <p>13.26%</p>
+
+            <input
+              min="0"
+              max="49"
+              type="range"
+              value="0"
+              id="slider2"
+              class="styled-slider slider-progress"
+            />
+            <div class="nums"><span>0 %</span><span>49 %</span></div>
+          </div>
+          <div class="inputGroup">
+            <div class="sc-eCrewB iCCZpA price">
+              <p class="priceText">Срок договора</p>
+              <p class="priceSum month">36 месяцев</p>
             </div>
-            <div class="divider"></div>
-            <div class="calculator__contract">
-              <span>Экономия по налогам</span>
-              <p>до 1 164 000 ₽</p>
+            <input
+              class="styled-slider slider-progress"
+              min="12"
+              max="36"
+              type="range"
+              value="12"
+              id="slider3"
+            />
+            <div class="nums">
+              <span>12 месяцев</span><span>60 месяцев</span>
             </div>
-            <button class="sc-cUEOzv chwvPL">Показать предложения (64)</button>
-            <div class="calculatorSubtitle">
-              Стоимость предмета лизинга и приведенные расчеты через калькулятор
-              являются предварительными. Для точного определения процентной
-              ставки по договору, пожалуйста, обратитесь к менеджеру в вашем
-              регионе. Калькулятор не следует применять для расчетов по 44-ФЗ и
-              223-ФЗ.
-            </div>
+          </div>
+        </div>
+        <div class="calculatorFlexElement _orange">
+          <span class="calculator__subprice">Ежемесячный платеж</span
+          ><span class="calculator__price">500 000 ₽</span>
+          <div class="calculator__contract">
+            <span>Сумма договора лизинга</span>
+            <p>200 000 ₽</p>
+          </div>
+          <div class="calculator__contract">
+            <span>Годовое удорожание</span>
+            <p>13.26%</p>
+          </div>
+          <div class="divider"></div>
+          <div class="calculator__contract">
+            <span>Экономия по налогам</span>
+            <p>до 1 164 000 ₽</p>
+          </div>
+          <button class="sc-cUEOzv chwvPL">Показать предложения (64)</button>
+          <div class="calculatorSubtitle">
+            Стоимость предмета лизинга и приведенные расчеты через калькулятор
+            являются предварительными. Для точного определения процентной ставки
+            по договору, пожалуйста, обратитесь к менеджеру в вашем регионе.
+            Калькулятор не следует применять для расчетов по 44-ФЗ и 223-ФЗ.
           </div>
         </div>
       </div>
