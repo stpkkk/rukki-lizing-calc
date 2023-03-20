@@ -15,7 +15,9 @@
           <div class="inputGroup">
             <div class="price">
               <label class="price-label">Стоимость имущества</label>
-              <output class="price-value priceSum">50000<span> ₽</span></output>
+              <output class="price-value priceSum" id="price-value"
+                >50000<span> ₽</span></output
+              >
             </div>
             <div>
               <input
@@ -35,8 +37,8 @@
             <div class="sc-islFiG jwyeRo payment">
               <div class="paymentText">Первоначальный взнос</div>
               <div class="paymentSum">
-                <div class="prise">0 ₽</div>
-                <div class="precent">0 %</div>
+                <div class="paymentPrice">0 ₽</div>
+                <div class="percent">0 %</div>
               </div>
             </div>
 
@@ -69,21 +71,13 @@
           </div>
         </div>
         <div class="calculatorFlexElement _orange">
-          <span class="calculator__subprice">Ежемесячный платеж</span
-          ><span class="calculator__price">500 000 ₽</span>
+          <span class="calculator__subprice">Ежемесячный платеж</span>
+          <p class="calculator__price">0 ₽</p>
           <div class="calculator__contract">
             <span>Сумма договора лизинга</span>
-            <p>200 000 ₽</p>
+            <span class="sum-contract">0 ₽</span>
           </div>
-          <div class="calculator__contract">
-            <span>Годовое удорожание</span>
-            <p>13.26%</p>
-          </div>
-          <div class="divider"></div>
-          <div class="calculator__contract">
-            <span>Экономия по налогам</span>
-            <p>до 1 164 000 ₽</p>
-          </div>
+
           <button class="sc-cUEOzv chwvPL">Показать предложения (64)</button>
           <div class="calculatorSubtitle">
             Стоимость предмета лизинга и приведенные расчеты через калькулятор

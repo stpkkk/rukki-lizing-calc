@@ -53,6 +53,7 @@
   border-radius: 5px;
   max-width: 570px;
   width: 100%;
+  min-height: 500px;
 }
 .inputGroup {
   padding: 0px 20px;
@@ -95,7 +96,7 @@ input[type="range"] {
   -ms-flex-pack: end;
   justify-content: end;
 }
-.prise {
+.paymentPrice {
   background: #f8f9fa;
   padding: 10px 15px;
   border-radius: 5px;
@@ -103,7 +104,7 @@ input[type="range"] {
   width: 70%;
   text-align: end;
 }
-.precent {
+.percent {
   background: #f8f9fa;
   padding: 10px 15px;
   border-radius: 5px;
@@ -154,12 +155,7 @@ input[type="range"] {
   color: #17161d;
   font-weight: medium;
 }
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: white;
-  margin: 10px 0px 20px;
-}
+
 .chwvPL {
   display: inline-block;
   background-color: #ec6e44;
@@ -347,5 +343,11 @@ input[type="range"].styled-slider.slider-progress::-ms-fill-lower {
   }
   .calculatorFlexElement._orange {
     padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .calculatorFlexElement._orange {
+    border-radius: 0;
   }
 }
