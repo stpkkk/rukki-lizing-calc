@@ -79,7 +79,8 @@ sliderRubInput.addEventListener("input", function () {
 });
 
 sliderPriceInput.addEventListener("input", function () {
-  contractSum.textContent = slider1.value;
+  const formattedPrice = formatter.format(slider1.value);
+  contractSum.textContent = `${formattedPrice} ₽`;
   calculateMonthlyPayment();
 });
 
