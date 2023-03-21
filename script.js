@@ -29,6 +29,22 @@ function setSliderRubInput() {
   )}`;
 }
 
+function setSliderPercentInput() {
+  const percentage = Math.trunc(
+    (parseInt(sliderRubInput.value) / parseInt(slider1.value)) * 100
+  );
+  if (percentage > 49) {
+    sliderPercentInput.value = "49";
+  } else {
+    sliderPercentInput.value = `${percentage}`;
+  }
+  slider2.style.setProperty("--value", sliderPercentInput.value);
+  slider2.value = sliderPercentInput.value;
+  sliderPercentInput.value === ""
+    ? (slider2.value = 0)
+    : sliderPercentInput.value;
+}
+
 slider1.addEventListener("input", function () {
   const formattedPrice = formatter.format(slider1.value);
   sliderPriceInput.textContent = `${formattedPrice} ₽`;
@@ -55,6 +71,7 @@ sliderMonthInput.addEventListener("input", function () {
 
 sliderRubInput.addEventListener("input", function () {
   calculateMonthlyPayment();
+  setSliderPercentInput(); //asdaaaaaa
 });
 
 sliderPriceInput.addEventListener("input", function () {
@@ -71,6 +88,12 @@ sliderPercentInput.addEventListener("input", function () {
 calculateMonthlyPayment();
 
 //sliders progress
+
+sliderPriceInput.addEventListener("input", function () {
+  slider1.style.setProperty("--value", sliderPriceInput.value);
+  sliderPriceInput.value === "" ? (slider1.value = 0) : sliderPriceInput.value;
+});
+
 sliderPercentInput.addEventListener("input", function () {
   slider2.style.setProperty("--value", sliderPercentInput.value);
   sliderPercentInput.value === ""
@@ -78,20 +101,9 @@ sliderPercentInput.addEventListener("input", function () {
     : sliderPercentInput.value;
 });
 
-sliderPriceInput.addEventListener("input", function () {
-  slider1.style.setProperty("--value", sliderPriceInput.value);
-  sliderPriceInput.value === "" ? (slider1.value = 0) : sliderPriceInput.value;
-});
-
 sliderMonthInput.addEventListener("input", function () {
   slider3.style.setProperty("--value", sliderMonthInput.value);
   sliderMonthInput.value === "" ? (slider3.value = 0) : sliderMonthInput.value;
-});
-
-sliderRubInput.addEventListener("input", function () {
-  sliderPercentInput.value = ""
-    ? (sliderRubInput.value = 0)
-    : (sliderRubInput.value = setSliderRubInput());
 });
 
 for (let el of document.querySelectorAll(
