@@ -17,10 +17,14 @@ function calculateMonthlyPayment() {
   const monthlyPayment =
     (parseInt(slider1.value) - parseInt(sliderRubInput.value)) /
     parseInt(slider3.value);
-  const formattedMonthlyPayment = formatter.format(Math.trunc(monthlyPayment));
-  monthlyPayment <= 0
-    ? (monthPayment.textContent = "0 ₽")
-    : (monthPayment.textContent = `${formattedMonthlyPayment} ₽`);
+  if (!Number.isFinite(monthlyPayment) || monthlyPayment <= 0) {
+    monthPayment.textContent = "0 ₽";
+  } else {
+    const formattedMonthlyPayment = formatter.format(
+      Math.trunc(monthlyPayment)
+    );
+    monthPayment.textContent = `${formattedMonthlyPayment} ₽`;
+  }
 }
 
 function setSliderRubInput() {
@@ -71,7 +75,7 @@ sliderMonthInput.addEventListener("input", function () {
 
 sliderRubInput.addEventListener("input", function () {
   calculateMonthlyPayment();
-  setSliderPercentInput(); //asdaaaaaa
+  setSliderPercentInput();
 });
 
 sliderPriceInput.addEventListener("input", function () {
@@ -91,7 +95,7 @@ calculateMonthlyPayment();
 
 sliderPriceInput.addEventListener("input", function () {
   slider1.style.setProperty("--value", sliderPriceInput.value);
-  sliderPriceInput.value === "" ? (slider1.value = 0) : sliderPriceInput.value;
+  sliderPriceInput.value === "" ? (slider1.value = 0) : slider1.value;
 });
 
 sliderPercentInput.addEventListener("input", function () {
@@ -103,7 +107,7 @@ sliderPercentInput.addEventListener("input", function () {
 
 sliderMonthInput.addEventListener("input", function () {
   slider3.style.setProperty("--value", sliderMonthInput.value);
-  sliderMonthInput.value === "" ? (slider3.value = 0) : sliderMonthInput.value;
+  sliderMonthInput.value === "" ? (slider3.value = 0) : slider3.value;
 });
 
 for (let el of document.querySelectorAll(
