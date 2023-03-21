@@ -1,56 +1,79 @@
 const slider1 = document.querySelector("#slider1");
-const priceValue = document.querySelector(".price-value");
+const priceValue = document.querySelector("#price");
 
 const slider2 = document.querySelector("#slider2");
-const percentValue = document.querySelector(".percent");
-const contributionRubles = document.querySelector(".paymentPrice");
+const percentValue = document.querySelector("#percent");
+const contributionRubles = document.querySelector("#payment");
 
 const slider3 = document.querySelector("#slider3");
-const slider3Value = document.querySelector(".month");
+const slider3Value = document.querySelector("#month");
 
-const contractSum = document.querySelector(".sum-contract");
-const monthPayment = document.querySelector(".calculator__price");
+const contractSum = document.querySelector("#contract");
+const monthPayment = document.querySelector("#month-payment");
 
-monthPayment.textContent = "0 ₽";
-priceValue.textContent = "0 ₽";
+let formatter = new Intl.NumberFormat("ru");
 
 function calculateMonthlyPayment() {
   const monthlyPayment =
-    (parseInt(slider1.value) - parseInt(contributionRubles.textContent)) /
+    (parseInt(slider1.value) - parseInt(contributionRubles.value)) /
     parseInt(slider3.value);
-  monthlyPayment < 0
+  const formattedMonthlyPayment = formatter.format(Math.trunc(monthlyPayment));
+  monthlyPayment <= 0
     ? (monthPayment.textContent = "0 ₽")
-    : (monthPayment.textContent = `${Math.trunc(monthlyPayment)} ₽`);
+    : (monthPayment.textContent = `${formattedMonthlyPayment} ₽`);
+}
+
+function setContributionRubles() {
+  contributionRubles.value = `${Math.trunc(
+    (parseInt(slider1.value) * parseInt(slider2.value)) / 100
+  )}`;
 }
 
 slider1.addEventListener("input", function () {
-  priceValue.textContent = `${slider1.value} ₽`;
-  contractSum.textContent = `${slider1.value} ₽`;
+  const formattedPrice = formatter.format(slider1.value);
+  priceValue.textContent = `${formattedPrice} ₽`;
+  contractSum.textContent = `${formattedPrice} ₽`;
+  setContributionRubles();
   calculateMonthlyPayment();
 });
 
 slider2.addEventListener("input", function () {
   percentValue.textContent = `${slider2.value} %`;
-  contributionRubles.textContent = `${Math.trunc(
-    (parseInt(slider1.value) * parseInt(slider2.value)) / 100
-  )} ₽`;
+  setContributionRubles();
   calculateMonthlyPayment();
 });
 
 slider3.addEventListener("input", function () {
-  slider3Value.textContent = `${slider3.value} месяцев`;
+  slider3Value.textContent = slider3.value;
+  setContributionRubles();
   calculateMonthlyPayment();
 });
 
-// calculate initial monthly payment
+contributionRubles.addEventListener("input", function () {});
+
+//calculate initial monthly payment
 calculateMonthlyPayment();
 
 //inputs progress
-for (let e of document.querySelectorAll(
+percentValue.addEventListener("input", function () {
+  slider2.style.setProperty("--value", percentValue.value);
+});
+
+priceValue.addEventListener("input", function () {
+  slider1.style.setProperty("--value", priceValue.value);
+});
+
+slider3Value.addEventListener("input", function () {
+  slider3.style.setProperty("--value", slider3Value.value);
+});
+
+for (let el of document.querySelectorAll(
   'input[type="range"].slider-progress'
 )) {
-  e.style.setProperty("--value", e.value);
-  e.style.setProperty("--min", e.min == "" ? "0" : e.min);
-  e.style.setProperty("--max", e.max == "" ? "100" : e.max);
-  e.addEventListener("input", () => e.style.setProperty("--value", e.value));
+  el.style.setProperty("--value", el.value);
+  el.style.setProperty("--min", el.min == "" ? "0" : el.min);
+  el.style.setProperty("--max", el.max == "" ? "100" : el.max);
+  el.addEventListener("input", () => {
+    el.style.setProperty("--value", el.value);
+  });
 }

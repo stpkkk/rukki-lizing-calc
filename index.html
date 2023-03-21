@@ -15,18 +15,29 @@
           <div class="inputGroup">
             <div class="price">
               <label class="price-label">Стоимость имущества</label>
-              <output class="price-value priceSum" id="price-value"
-                >50000<span> ₽</span></output
-              >
+              <div class="input-box">
+                <input
+                  class="priceSum price-value"
+                  id="price"
+                  type="number"
+                  value="0"
+                  step="1000000"
+                  min="0"
+                  max="400000000"
+                  oninput="slider1.value=price.value"
+                />
+                <p class="month-unit">₽</p>
+              </div>
             </div>
             <div>
               <input
                 type="range"
-                min="500000"
+                min="0"
                 max="400000000"
-                value="500000"
+                value="0"
                 id="slider1"
                 class="styled-slider slider-progress"
+                oninput="price.value=slider1.value"
               />
             </div>
             <div class="nums">
@@ -34,11 +45,32 @@
             </div>
           </div>
           <div class="inputGroup">
-            <div class="sc-islFiG jwyeRo payment">
+            <div class="sc-islFiG jwyeRo">
               <div class="paymentText">Первоначальный взнос</div>
               <div class="paymentSum">
-                <div class="paymentPrice">0 ₽</div>
-                <div class="percent">0 %</div>
+                <div class="input-box">
+                  <input
+                    class="priceSum payment"
+                    id="payment"
+                    type="number"
+                    value="0"
+                    min="10"
+                    max="4000000000"
+                  />
+                  <p class="month-unit">₽</p>
+                </div>
+                <div class="input-box">
+                  <input
+                    class="priceSum percent"
+                    id="percent"
+                    type="number"
+                    value="0"
+                    min="0"
+                    max="49"
+                    oninput="slider2.value=percent.value"
+                  />
+                  <p class="month-unit">%</p>
+                </div>
               </div>
             </div>
 
@@ -49,21 +81,34 @@
               value="0"
               id="slider2"
               class="styled-slider slider-progress"
+              oninput="percent.value=slider2.value"
             />
             <div class="nums"><span>0 %</span><span>49 %</span></div>
           </div>
           <div class="inputGroup">
             <div class="sc-eCrewB iCCZpA price">
-              <p class="priceText">Срок договора</p>
-              <p class="priceSum month">36 месяцев</p>
+              <label class="priceText">Срок договора</label>
+              <div class="input-box">
+                <input
+                  class="priceSum month-value"
+                  id="month"
+                  type="number"
+                  value="12"
+                  min="12"
+                  max="60"
+                  oninput="slider3.value=month.value"
+                />
+                <p class="month-unit">мес.</p>
+              </div>
             </div>
             <input
-              class="styled-slider slider-progress"
+              class="styled-slider slider-progress month-slider"
               min="12"
-              max="36"
+              max="60"
               type="range"
               value="12"
               id="slider3"
+              oninput="month.value=slider3.value"
             />
             <div class="nums">
               <span>12 месяцев</span><span>60 месяцев</span>
@@ -72,10 +117,10 @@
         </div>
         <div class="calculatorFlexElement _orange">
           <span class="calculator__subprice">Ежемесячный платеж</span>
-          <p class="calculator__price">0 ₽</p>
+          <p class="calculator__price" id="month-payment">0</p>
           <div class="calculator__contract">
-            <span>Сумма договора лизинга</span>
-            <span class="sum-contract">0 ₽</span>
+            <p>Сумма договора лизинга</p>
+            <span class="sum-contract" id="contract">0 ₽</span>
           </div>
 
           <button class="sc-cUEOzv chwvPL">Показать предложения (64)</button>
