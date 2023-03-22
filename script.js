@@ -2,11 +2,11 @@ const slider1 = document.querySelector("#slider1");
 const sliderPriceInput = document.querySelector("#price");
 
 const slider2 = document.querySelector("#slider2");
-const sliderPercentInput = document.querySelector("#percent");
-const sliderRubInput = document.querySelector("#payment");
+const percentInput = document.querySelector("#percent");
+const firstPaymentInput = document.querySelector("#payment");
 
 const slider3 = document.querySelector("#slider3");
-const sliderMonthInput = document.querySelector("#month");
+const monthInput = document.querySelector("#month");
 
 const contractSum = document.querySelector("#contract");
 const monthPayment = document.querySelector("#month-payment");
@@ -15,7 +15,7 @@ let formatter = new Intl.NumberFormat("ru-RU");
 
 function calculateMonthlyPayment() {
   const monthlyPayment =
-    (parseInt(slider1.value) - parseInt(sliderRubInput.value)) /
+    (parseInt(slider1.value) - parseInt(firstPaymentInput.value)) /
     parseInt(slider3.value);
   if (!Number.isFinite(monthlyPayment) || monthlyPayment <= 0) {
     monthPayment.textContent = "0 ₽";
@@ -28,25 +28,23 @@ function calculateMonthlyPayment() {
 }
 
 function setSliderRubInput() {
-  sliderRubInput.value = `${Math.trunc(
+  firstPaymentInput.value = `${Math.trunc(
     (parseInt(slider1.value) * parseInt(slider2.value)) / 100
   )}`;
 }
 
 function setSliderPercentInput() {
   const percentage = Math.trunc(
-    (parseInt(sliderRubInput.value) / parseInt(slider1.value)) * 100
+    (parseInt(firstPaymentInput.value) / parseInt(slider1.value)) * 100
   );
   if (percentage > 49) {
-    sliderPercentInput.value = "49";
+    percentInput.value = "49";
   } else {
-    sliderPercentInput.value = `${percentage}`;
+    percentInput.value = `${percentage}`;
   }
-  slider2.style.setProperty("--value", sliderPercentInput.value);
-  slider2.value = sliderPercentInput.value;
-  sliderPercentInput.value === ""
-    ? (slider2.value = 0)
-    : sliderPercentInput.value;
+  slider2.style.setProperty("--value", percentInput.value);
+  slider2.value = percentInput.value;
+  percentInput.value === "" ? (slider2.value = 0) : percentInput.value;
 }
 
 slider1.addEventListener("input", function () {
@@ -58,33 +56,37 @@ slider1.addEventListener("input", function () {
 });
 
 slider2.addEventListener("input", function () {
-  sliderPercentInput.textContent = `${slider2.value} %`;
+  percentInput.textContent = `${slider2.value} %`;
   setSliderRubInput();
   calculateMonthlyPayment();
 });
 
 slider3.addEventListener("input", function () {
-  sliderMonthInput.textContent = slider3.value;
+  monthInput.textContent = slider3.value;
   setSliderRubInput();
   calculateMonthlyPayment();
 });
 
-sliderMonthInput.addEventListener("input", function () {
+monthInput.addEventListener("input", function () {
   calculateMonthlyPayment();
 });
 
-sliderRubInput.addEventListener("input", function () {
+firstPaymentInput.addEventListener("input", function () {
   calculateMonthlyPayment();
   setSliderPercentInput();
 });
 
 sliderPriceInput.addEventListener("input", function () {
-  const formattedPrice = formatter.format(slider1.value);
-  contractSum.textContent = `${formattedPrice} ₽`;
+  if (sliderPriceInput.value >= parseInt(sliderPriceInput.max)) {
+    contractSum.textContent = parseInt(sliderPriceInput.max);
+  } else {
+    const formattedSliderPriceInput = formatter.format(sliderPriceInput.value);
+    contractSum.textContent = `${formattedSliderPriceInput} ₽`;
+  }
   calculateMonthlyPayment();
 });
 
-sliderPercentInput.addEventListener("input", function () {
+percentInput.addEventListener("input", function () {
   setSliderRubInput();
   calculateMonthlyPayment();
 });
@@ -96,19 +98,23 @@ calculateMonthlyPayment();
 
 sliderPriceInput.addEventListener("input", function () {
   slider1.style.setProperty("--value", sliderPriceInput.value);
-  sliderPriceInput.value === "" ? (slider1.value = 0) : slider1.value;
+  if (sliderPriceInput.value <= parseInt(sliderPriceInput.min - 1)) {
+    slider1.value = 0;
+    monthPayment.textContent = "0 ₽";
+  } else {
+    slider1.value;
+    monthPayment.textContent = `${formattedMonthlyPayment} ₽`;
+  }
 });
 
-sliderPercentInput.addEventListener("input", function () {
-  slider2.style.setProperty("--value", sliderPercentInput.value);
-  sliderPercentInput.value === ""
-    ? (slider2.value = 0)
-    : sliderPercentInput.value;
+percentInput.addEventListener("input", function () {
+  slider2.style.setProperty("--value", percentInput.value);
+  percentInput.value === "" ? (slider2.value = 0) : percentInput.value;
 });
 
-sliderMonthInput.addEventListener("input", function () {
-  slider3.style.setProperty("--value", sliderMonthInput.value);
-  sliderMonthInput.value === "" ? (slider3.value = 0) : slider3.value;
+monthInput.addEventListener("input", function () {
+  slider3.style.setProperty("--value", monthInput.value);
+  monthInput.value === "" ? (slider3.value = 0) : slider3.value;
 });
 
 for (let el of document.querySelectorAll(
