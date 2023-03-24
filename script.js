@@ -1,5 +1,5 @@
 const slider1 = document.querySelector("#slider1");
-const sliderPriceInput = document.querySelector("#price");
+const priceInput = document.querySelector("#price");
 
 const slider2 = document.querySelector("#slider2");
 const percentInput = document.querySelector("#percent");
@@ -11,9 +11,21 @@ const monthInput = document.querySelector("#month");
 const contractSum = document.querySelector("#contract");
 const monthPayment = document.querySelector("#month-payment");
 
+const button = document.querySelector(".chwvPL");
+
+screen.width >= 980
+  ? button.setAttribute(
+      "onclick",
+      "location.href='http://rukkipro.tilda.ws/#uc-zw-zayavka';"
+    )
+  : button.setAttribute(
+      "onclick",
+      "location.href='http://rukkipro.tilda.ws/#uc-zv-zayavka';"
+    );
+
 let formatter = new Intl.NumberFormat("ru-RU");
 
-function calculateMonthlyPayment() {
+function setMonthlyPayment() {
   const monthlyPayment =
     (parseInt(slider1.value) - parseInt(firstPaymentInput.value)) /
     parseInt(slider3.value);
@@ -27,13 +39,13 @@ function calculateMonthlyPayment() {
   }
 }
 
-function setSliderRubInput() {
+function setFirstPaymentInput() {
   firstPaymentInput.value = `${Math.trunc(
     (parseInt(slider1.value) * parseInt(slider2.value)) / 100
   )}`;
 }
 
-function setSliderPercentInput() {
+function setPercentInput() {
   const percentage = Math.trunc(
     (parseInt(firstPaymentInput.value) / parseInt(slider1.value)) * 100
   );
@@ -49,61 +61,57 @@ function setSliderPercentInput() {
 
 slider1.addEventListener("input", function () {
   const formattedPrice = formatter.format(slider1.value);
-  sliderPriceInput.textContent = `${formattedPrice} ₽`;
+  priceInput.textContent = `${formattedPrice} ₽`;
   contractSum.textContent = `${formattedPrice} ₽`;
-  setSliderRubInput();
-  calculateMonthlyPayment();
+  setFirstPaymentInput();
+  setMonthlyPayment();
 });
 
 slider2.addEventListener("input", function () {
   percentInput.textContent = `${slider2.value} %`;
-  setSliderRubInput();
-  calculateMonthlyPayment();
+  setFirstPaymentInput();
+  setMonthlyPayment();
 });
 
 slider3.addEventListener("input", function () {
   monthInput.textContent = slider3.value;
-  setSliderRubInput();
-  calculateMonthlyPayment();
+  setFirstPaymentInput();
+  setMonthlyPayment();
 });
 
 monthInput.addEventListener("input", function () {
-  calculateMonthlyPayment();
+  setMonthlyPayment();
 });
 
 firstPaymentInput.addEventListener("input", function () {
-  calculateMonthlyPayment();
-  setSliderPercentInput();
+  setMonthlyPayment();
+  setPercentInput();
 });
 
-sliderPriceInput.addEventListener("input", function () {
-  if (sliderPriceInput.value >= parseInt(sliderPriceInput.max)) {
-    contractSum.textContent = parseInt(sliderPriceInput.max);
+priceInput.addEventListener("input", function () {
+  if (priceInput.value >= parseInt(priceInput.max)) {
+    contractSum.textContent = parseInt(priceInput.max);
   } else {
-    const formattedSliderPriceInput = formatter.format(sliderPriceInput.value);
+    const formattedSliderPriceInput = formatter.format(priceInput.value);
     contractSum.textContent = `${formattedSliderPriceInput} ₽`;
   }
-  calculateMonthlyPayment();
+  setMonthlyPayment();
 });
 
 percentInput.addEventListener("input", function () {
-  setSliderRubInput();
-  calculateMonthlyPayment();
+  setFirstPaymentInput();
+  setMonthlyPayment();
 });
 
 //calculate initial monthly payment
-calculateMonthlyPayment();
 
-//sliders progress
-
-sliderPriceInput.addEventListener("input", function () {
-  slider1.style.setProperty("--value", sliderPriceInput.value);
-  if (sliderPriceInput.value <= parseInt(sliderPriceInput.min - 1)) {
+priceInput.addEventListener("input", function () {
+  slider1.style.setProperty("--value", priceInput.value);
+  if (priceInput.value <= parseInt(priceInput.min - 1)) {
     slider1.value = 0;
     monthPayment.textContent = "0 ₽";
   } else {
     slider1.value;
-    monthPayment.textContent = `${formattedMonthlyPayment} ₽`;
   }
 });
 
@@ -127,3 +135,5 @@ for (let el of document.querySelectorAll(
     el.style.setProperty("--value", el.value);
   });
 }
+
+setMonthlyPayment();

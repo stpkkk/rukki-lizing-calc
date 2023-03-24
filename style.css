@@ -201,7 +201,6 @@ input[type="range"] {
 
 .chwvPL:hover {
   background: #fff;
-  border: 1px solid #ec6e44;
   color: #ec6e44;
 }
 
@@ -357,6 +356,7 @@ input[type="range"].styled-slider.slider-progress::-ms-fill-lower {
   }
 
   .chwvPL {
+    text-align: center;
     padding: 20px 10px;
     width: 100%;
   }
